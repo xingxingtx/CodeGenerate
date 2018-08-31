@@ -1,5 +1,9 @@
 package code.util;
 
+import io.swagger.models.auth.In;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,10 +87,47 @@ public class Utils {
                 return entry.getKey() + "_id Long,";
         }
     }
-    public static String tableNameToEntityName(){
-        return null;
+    public static String tableNameToEntityName(String tableName){
+        String reName = null;
+        if(tableName.contains("_")){
+            String[] strings = tableName.split("_");
+            reName = strings[0];
+            for(int i = 0;i < strings.length; i++){
+                if(i > 0){
+                    reName += upperCase(strings[i]);
+                }
+            }
+        }else {
+            return tableName;
+        }
+        return reName;
     }
-    public static String entityNameToTableName(){
-        return null;
+
+    /*
+    * 将实体类的驼峰命名转成数据库习惯命名：例如：userName ---> user_name
+    */
+    public static String entityNameToTableName(String entityName){
+       StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < entityName.length(); i++) {
+            char c = entityName.charAt(i);
+            if (!Character.isLowerCase(c)) {
+               sb.append("_");
+            }
+            sb.append(c);
+        }
+        return sb.toString().toLowerCase();
     }
+
+    /*
+    *
+    * 大写首字母
+    */
+    public static String upperCase(String str) {
+        char[] ch = str.toCharArray();
+        if (ch[0] >= 'a' && ch[0] <= 'z') {
+            ch[0] = (char) (ch[0] - 32);
+        }
+        return new String(ch);
+    }
+
 }
