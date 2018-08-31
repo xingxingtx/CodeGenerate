@@ -159,7 +159,7 @@ public class MyGenerator {
 
         LinkedHashMap<String, String> propertys = info.getFieldMap();
         LinkedHashMap<String, String> importFieldMap = info.getImportFieldMap();
-        List<String> genericFieldList = info.getGenericFieldList();
+        List<TableAndEntity> genericFieldList = info.getGenericFieldList();
         List<AssociationObject> association = info.getAssociation();
         StringBuilder insert1 = new StringBuilder().append("insert into " + info.getBigClassName() + "  (");
         StringBuilder insert2 = new StringBuilder().append("  values( ");
@@ -181,7 +181,7 @@ public class MyGenerator {
             if (Utils.judgeType(value)) {
                 // 插入时不需要主键
                 if (!key.equals("id")) {
-                    genericFieldList.add(key);
+                    genericFieldList.add(new TableAndEntity(key, Utils.entityNameToTableName(key)));
                     insert1.append(" " + key + " ,");
                     insert2.append(" #{" + key + "} ,");
                     update.append(" " + key + "=#{" + key + "}, ");

@@ -4,7 +4,7 @@
     <resultMap id="${smallClassName}ResultMap" type="${basePackage}.model.${bigClassName}">
         <id column="id" property="id" jdbcType="BIGINT" />
     <#list genericFieldList as genericField>
-        <result column="${genericField}" property="${genericField}" />
+        <result column="${genericField.column}" property="${genericField.property}" />
     </#list>
     <#list association as item>
         <association property="${item.property}" columnPrefix="${item.columnPrefix}"

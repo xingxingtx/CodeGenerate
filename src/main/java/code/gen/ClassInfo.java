@@ -16,7 +16,7 @@ public class ClassInfo {
     private String bigClassName; // 大写类名
     private String smallClassName;// 首字母小写的类名
     private LinkedHashMap<String, String> fieldMap = new LinkedHashMap<>();
-    private List<String> genericFieldList = new ArrayList<>();
+    private List<TableAndEntity> genericFieldList = new ArrayList<>();
     private LinkedHashMap<String, String> importFieldMap = new LinkedHashMap<>();
     private List<AssociationObject> association = new ArrayList<>();
 
