@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Created by psl on 2018-04-03.
+ * Created by weipeng on 2018-04-03.
  */
 public class JsonResponseData {
     private static Gson gson=new GsonBuilder().create();

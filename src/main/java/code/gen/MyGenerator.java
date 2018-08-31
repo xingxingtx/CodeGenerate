@@ -15,23 +15,18 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import code.config.ConfigurationValue;
-import code.model.User;
 import code.util.JDBCUtils;
 import code.util.Utils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Administrator on 2018/8/30.
+ * Created by weipeng on 2018/8/30.
  */
 @Component
 public class MyGenerator {
-
-
-    //public static String basePath = "E:\\aaaProjrct\\CodeGenerate\\src\\main\\resources\\ftls";
     private static final int FEILDL_ENGTH = 1;// 统一定义截取字符串的长度为多少字母
     private static Configuration config = new Configuration(new Version("2.3.23"));
     static {
@@ -41,13 +36,17 @@ public class MyGenerator {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) throws Exception {
-        //generatorByEntity();
+    /*
+    * 根据表的信息生成实体类
+    */
+    public static void generatorEntityByTables(){
+
 
     }
 
-
-
+    /*
+    *根据实体类生成dao，Service，xml，mapper
+    */
     public static void generatorByEntity(Object object) throws Exception{
         ClassInfo info = new ClassInfo(object.getClass());
         boolean bl = JDBCUtils.isExistTable(info.getBigClassName());
@@ -55,15 +54,15 @@ public class MyGenerator {
             // 创建表
             createTable(info);
         }
+
+        // 生成Service接口
+        createService(info, "service.ftl", ConfigurationValue.service + "I{1}Service.java");
         // 生成xml文件
         createMyBatisXML(info, "mapperxml.ftl",  ConfigurationValue.XML + "{1}Mapper.xml");
 
         // mapper接口
-        createMapper(info, "Mapper.ftl", ConfigurationValue.mapper + "{1}Mapper.java");
+        createMapper(info, "mapper.ftl", ConfigurationValue.mapper + "{1}Mapper.java");
 
-
-        // 生成Service接口
-        createService(info, "service.ftl", ConfigurationValue.service + "I{1}Service.java");
 
         // 生成Service实现类
         createServiceImpl(info, "serviceImpl.ftl", ConfigurationValue.serviceImpl + "{1}ServiceImpl.java");
@@ -71,7 +70,6 @@ public class MyGenerator {
         //生成dao接口
         createDao(info,"dao.ftl",ConfigurationValue.dao + "{1}Dao.java");
     }
-
 
 
     private static void createMapper(ClassInfo info, String templateFile, String targetFile) throws Exception {
@@ -94,9 +92,14 @@ public class MyGenerator {
         createFile(info, templateFile, targetFile);
         System.out.println("生成I" + info.getBigClassName() + "dao接口");
     }
-    private static void createController(ClassInfo info, String templateFile, String targetFile) throws Exception {
-        createFile(info, templateFile, targetFile);
-        System.out.println("生成" + info.getBigClassName() + "Controller文件");
+
+
+    private static void createEntity(ClassInfo info, String templateFile, String targetFile) throws Exception {
+        createEntityFile(info, templateFile, targetFile);
+        System.out.println("生成" + info.getBigClassName() + "Entity实体类");
+    }
+
+    private static void createEntityFile(ClassInfo info, String templateFile, String targetFile) {
     }
 
     // 数据库表的创建

@@ -2,7 +2,7 @@ package ${basePackage}.dao;
 
 import ${basePackage}.model.${bigClassName};
 
-public interface ${bigClassName}dao {
+public interface ${bigClassName}Dao {
 
 void insert(${bigClassName} ${smallClassName});
 

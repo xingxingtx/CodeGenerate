@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Administrator on 2018/8/31.
+ * Created by weipeng on 2018/8/31.
  */
 @Configuration
 public class ConfigurationValue {

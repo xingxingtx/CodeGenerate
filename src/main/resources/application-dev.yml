@@ -64,9 +64,9 @@ JDBCUtils:
 #ConfigurationValue配置类
 configuration:
     basePath: E:\aaaProjrct\CodeGenerate\src\main\resources\ftls
-    dao: src/main/java/code/dao/
-    mapper: src/main/java/code/mapper/
-    service: src/main/java/code/service/
-    serviceImpl: src/main/java/code/service/impl/
-    xml: src/main/resources/mapper/
+    dao: E:\aaaProjrct\CodeGenerate\src\main\java\code\dao\
+    mapper: E:\aaaProjrct\CodeGenerate\src\main\java\code\mapper\
+    service: E:\aaaProjrct\CodeGenerate\src\main\java\code\service\
+    serviceImpl: E:\aaaProjrct\CodeGenerate\src\main\java\code\service\impl\
+    xml:  E:\aaaProjrct\CodeGenerate\src\main\resources\mapper\
 

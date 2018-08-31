@@ -6,7 +6,7 @@ package ${basePackage}.service;
 import ${basePackage}.model.${bigClassName};
 
 
-public interface ${bigClassName}Service {
+public interface I${bigClassName}Service {
 
 void insert(${bigClassName} ${smallClassName});
 

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/8/30.
+ * Created by weipeng on 2018/8/30.
  */
 @Data
 public class User {

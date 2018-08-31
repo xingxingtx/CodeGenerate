@@ -3,7 +3,7 @@ package code.util;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2018/8/30.
+ * Created by weipeng on 2018/8/30.
  */
 public class Utils {
     private Utils(){}
@@ -11,7 +11,15 @@ public class Utils {
     * java 类型的判断,只判断了常用类型
     */
     public static boolean judgeType(String type) {
-        switch (type) {
+        String javaType = "";
+        if (type.contains(".")) {
+            //类型的截取
+            int lastIndexOf = type.lastIndexOf(".");
+            javaType = type.substring(lastIndexOf + 1);
+        } else {
+            javaType = type;
+        }
+        switch (javaType) {
             case "int":
             case "Integer":
             case "long":
@@ -75,6 +83,10 @@ public class Utils {
                 return entry.getKey() + "_id Long,";
         }
     }
-
-
+    public static String tableNameToEntityName(){
+        return null;
+    }
+    public static String entityNameToTableName(){
+        return null;
+    }
 }
