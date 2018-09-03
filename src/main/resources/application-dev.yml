@@ -69,4 +69,4 @@ configuration:
     service: E:\aaaProjrct\CodeGenerate\src\main\java\code\service\
     serviceImpl: E:\aaaProjrct\CodeGenerate\src\main\java\code\service\impl\
     xml:  E:\aaaProjrct\CodeGenerate\src\main\resources\mapper\
-
+    model: E:\aaaProjrct\CodeGenerate\src\main\java\code\model\

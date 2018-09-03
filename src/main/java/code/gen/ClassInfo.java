@@ -15,6 +15,7 @@ public class ClassInfo {
     private String basePackage; // 基本包
     private String bigClassName; // 大写类名
     private String smallClassName;// 首字母小写的类名
+    //用于存储属性（Map<字段名称，字段类型>）
     private LinkedHashMap<String, String> fieldMap = new LinkedHashMap<>();
     private List<TableAndEntity> genericFieldList = new ArrayList<>();
     private LinkedHashMap<String, String> importFieldMap = new LinkedHashMap<>();

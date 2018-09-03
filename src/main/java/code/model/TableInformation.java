@@ -7,9 +7,9 @@ import lombok.Data;
  */
 @Data
 public class TableInformation {
-    //列名
+    //列名,实体类属性名
     private  String columnName;
-    //类型名称
+    //类型名称，实体类的属性类型
     private  String columnType;
     //列的大小
     private int dataSize;

@@ -6,15 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import code.config.ConfigurationValue;
+import code.model.TableInformation;
 import code.util.JDBCUtils;
 import code.util.Utils;
 import freemarker.template.Configuration;
@@ -39,8 +35,8 @@ public class MyGenerator {
     /*
     * 根据表的信息生成实体类
     */
-    public static void generatorEntityByTables(){
-
+    public static void generatorEntityByTables(String tableName) throws  Exception{
+        createEntity("entity.ftl", ConfigurationValue.model + "{0}model.java",tableName);
 
     }
 
@@ -63,12 +59,11 @@ public class MyGenerator {
         // mapper接口
         createMapper(info, "mapper.ftl", ConfigurationValue.mapper + "{1}Mapper.java");
 
-
         // 生成Service实现类
         createServiceImpl(info, "serviceImpl.ftl", ConfigurationValue.serviceImpl + "{1}ServiceImpl.java");
 
         //生成dao接口
-        createDao(info,"dao.ftl",ConfigurationValue.dao + "{1}Dao.java");
+        createDao(info,"dao.ftl",ConfigurationValue.dao + "{1}.java");
     }
 
 
@@ -94,13 +89,10 @@ public class MyGenerator {
     }
 
 
-    private static void createEntity(ClassInfo info, String templateFile, String targetFile) throws Exception {
-        createEntityFile(info, templateFile, targetFile);
-        System.out.println("生成" + info.getBigClassName() + "Entity实体类");
+    private static void createEntity(String templateFile, String targetFile, String tableName) throws Exception {
+        createEntityFile(templateFile, targetFile, tableName);
     }
 
-    private static void createEntityFile(ClassInfo info, String templateFile, String targetFile) {
-    }
 
     // 数据库表的创建
     private static void createTable(ClassInfo info) throws SQLException {
@@ -153,6 +145,43 @@ public class MyGenerator {
         }
         template.process(info, new FileWriter(file));
     }
+    private static void createEntityFile(String templateFile, String targetFile, String tableName) throws Exception {
+        Map<String, List<TableInformation>> map = JDBCUtils.getTableInformation(tableName);
+        for(String key: map.keySet()){
+            String reTargetFile = targetFile;
+            EntityClassInfo info = new EntityClassInfo();
+            info.setClassName(Utils.upperCase(Utils.tableNameToEntityName(key)));
+            info.setAuthor("wei.peng");
+            List<TableInformation> tableInformations = map.get(key);
+            for(TableInformation table: tableInformations){
+                TableInformation tableInformation = new TableInformation();
+                tableInformation.setColumnName(Utils.tableNameToEntityName(table.getColumnName()));
+                tableInformation.setColumnType(Utils.toJavaType(table.getColumnType()));
+                info.entityList.add(tableInformation);
+            }
+            Template template = config.getTemplate(templateFile);
+            reTargetFile = MessageFormat.format(reTargetFile,  info.getClassName());
+            System.out.println(templateFile);
+            System.out.println(reTargetFile);
+            File file = new File(reTargetFile);
+            // 如果文件存在则报错，不会覆盖以前的文件
+            if (file.exists()) {
+                throw new RuntimeException(file.getName() + "已经存在！");
+            }
+            File parentFile = file.getParentFile();
+            // 创建文件目录
+            if (!parentFile.exists()) {
+                parentFile.mkdirs();
+            }
+            template.process(info, new FileWriter(file));
+
+        }
+
+
+
+    }
+
+
 
     // Mybatis文件的创建
     private static void createMyBatisXML(ClassInfo info, String templateFile, String targetFile) throws Exception {
@@ -298,5 +327,7 @@ public class MyGenerator {
         // 生成xml文件
         template.process(info, new FileWriter(file));
     }
+
+
 
 }

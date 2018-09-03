@@ -22,7 +22,14 @@ public class ConfigurationValue {
     public static String serviceImpl;
     //代码生成所配置的文件dao生成路径
     public static String dao;
+    //代码生成所配置的文件model生成路径
+    public static String model;
 
+
+    @Value("${configuration.model}")
+    public  void setModel(String model) {
+        ConfigurationValue.model = model;
+    }
     @Value("${configuration.basePath}")
     public  void setBasePath(String basePath) {
         ConfigurationValue.basePath = basePath;

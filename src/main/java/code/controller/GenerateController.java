@@ -32,4 +32,15 @@ public class GenerateController {
         }
         return new JsonResponseData(true,"代码生成",1,"代码生成",null).toString();
     }
+
+    @RequestMapping("/api/entityGenerator")
+    public String entityGenerator(@RequestParam(value = "tableName",required = false) String tableName){
+        try {
+            myGenerator.generatorEntityByTables(tableName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new JsonResponseData(true,"代码生成实体类",1,"代码生成实体类",null).toString();
+    }
+
 }
