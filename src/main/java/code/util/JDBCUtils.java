@@ -20,16 +20,11 @@ import java.util.Map;
 @Component
 @Configuration
 public class JDBCUtils {
-    public static void main(String[] args){
-
-        getTableInformation("user");
-
-    }
     public   static String driver;
     public   static String url;
     public   static String userName;
     public   static String possWord;
-
+    public   static  String databaseName;
     public static Connection getConnection(){
         Connection connection = null;
         try {
@@ -44,7 +39,7 @@ public class JDBCUtils {
     * 判断表createTableName是否已经存在
     */
     public static boolean isExistTable(String createTableName){
-        String sql = "SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+createTableName+"' AND TABLE_SCHEMA = 'crud_test';";
+        String sql = "SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+createTableName+"' AND TABLE_SCHEMA = '"+databaseName+"';";
         Connection connection = getConnection();
         Statement statement = null;
         ResultSet rs = null;
@@ -172,5 +167,9 @@ public class JDBCUtils {
     @Value("${JDBCUtils.possWord}")
     public  void setPossWord(String possWord) {
         JDBCUtils.possWord = possWord;
+    }
+    @Value("${JDBCUtils.databaseName}")
+    public  void setDatabaseName(String databaseName) {
+        JDBCUtils.databaseName = databaseName;
     }
 }

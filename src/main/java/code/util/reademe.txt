@@ -1,3 +1,4 @@
+JDBCUtils.getTableInformation需要用的参数
 每个列描述都有以下列：
 TABLE_CAT String => 表类别（可为 null）
 TABLE_SCHEM String => 表模式（可为 null）

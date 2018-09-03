@@ -135,15 +135,15 @@ public class Utils {
     * 数据库类型转化成Java对应的类型，这里为了方便出了int类型其余都转化了String类型
     *
     */
-
     public static String toJavaType(String type){
-        switch (type){
+        //数据库有可能返回类型是大写，所以先转成小写
+        switch (type.toLowerCase()){
             case "bigint":
             case "integer":
             case "int":
             case "tinyint":
             case "smallint":
-                return "int";
+                return "Integer";
             default:
                 return "String";
         }

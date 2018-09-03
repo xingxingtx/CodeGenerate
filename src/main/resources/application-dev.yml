@@ -47,13 +47,13 @@ spring:
 #sql打印
 logging:
   level:
-   com.youmei.mapper: DEBUG
+   code.mapper: DEBUG
 #swagger是否开启
 swagger:
   show: true
 #配置mybatis扫描位置
 mybatis:
-  mapper-locations: classpath*:mybatis/Mapper/**/*Mapper.xml
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
 
 #jdbc数据库连接配置,服务JDBCUtils工具类配置
 JDBCUtils:
@@ -61,6 +61,7 @@ JDBCUtils:
     url: jdbc:mysql://localhost:3306/crud_test?useSSL=false&useUnicode=true&characterEncoding=utf-8
     userName: root
     possWord: root
+    databaseName: crud_test
 #ConfigurationValue配置类
 configuration:
     basePath: E:\aaaProjrct\CodeGenerate\src\main\resources\ftls
@@ -70,3 +71,4 @@ configuration:
     serviceImpl: E:\aaaProjrct\CodeGenerate\src\main\java\code\service\impl\
     xml:  E:\aaaProjrct\CodeGenerate\src\main\resources\mapper\
     model: E:\aaaProjrct\CodeGenerate\src\main\java\code\model\
+    controller: E:\aaaProjrct\CodeGenerate\src\main\java\code\controller

@@ -24,8 +24,14 @@ public class ConfigurationValue {
     public static String dao;
     //代码生成所配置的文件model生成路径
     public static String model;
+    //代码生成所配置的文件controller生成路径
+    public static String controller;
 
 
+    @Value("${configuration.contrller}")
+    public  void setController(String controller) {
+        ConfigurationValue.controller = controller;
+    }
     @Value("${configuration.model}")
     public  void setModel(String model) {
         ConfigurationValue.model = model;
@@ -34,27 +40,22 @@ public class ConfigurationValue {
     public  void setBasePath(String basePath) {
         ConfigurationValue.basePath = basePath;
     }
-
     @Value("${configuration.xml}")
     public  void setXML(String XML) {
         ConfigurationValue.XML = XML;
     }
-
     @Value("${configuration.mapper}")
     public  void setMapper(String mapper) {
         ConfigurationValue.mapper = mapper;
     }
-
     @Value("${configuration.service}")
     public  void setService(String service) {
         ConfigurationValue.service = service;
     }
-
     @Value("${configuration.serviceImpl}")
     public  void setServiceImpl(String serviceImpl) {
         ConfigurationValue.serviceImpl = serviceImpl;
     }
-
     @Value("${configuration.dao}")
     public  void setDao(String dao) {
         ConfigurationValue.dao = dao;

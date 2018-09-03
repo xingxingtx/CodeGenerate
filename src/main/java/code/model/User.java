@@ -16,5 +16,4 @@ public class User {
     private String status;
     private String createTime;
     private String updateTime;
-    private List<String> hobby;
 }
