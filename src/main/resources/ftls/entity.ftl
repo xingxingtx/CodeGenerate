@@ -6,7 +6,7 @@ import lombok.Data;
 *  @author ${author}
 */
 @Data
-public class ${className}model {
+public class ${className}Model {
 <#list entityList as attr>
 private ${attr.columnType} ${attr.columnName};
 </#list>

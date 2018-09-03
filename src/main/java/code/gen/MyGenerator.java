@@ -36,7 +36,7 @@ public class MyGenerator {
     * 根据表的信息生成实体类
     */
     public static void generatorEntityByTables(String tableName) throws  Exception{
-        createEntity("entity.ftl", ConfigurationValue.model + "{0}model.java",tableName);
+        createEntity("entity.ftl", ConfigurationValue.model + "{0}Model.java",tableName);
 
     }
 
@@ -133,25 +133,20 @@ public class MyGenerator {
         targetFile = MessageFormat.format(targetFile, info.getBasePackage().replace(".", "/"), info.getBigClassName());
         System.out.println(templateFile);
         System.out.println(targetFile);
-        File file = new File(targetFile);
-        // 如果文件存在则报错，不会覆盖以前的文件
-        if (file.exists()) {
-            throw new RuntimeException(file.getName() + "已经存在！");
-        }
-        File parentFile = file.getParentFile();
-        // 创建文件目录
-        if (!parentFile.exists()) {
-            parentFile.mkdirs();
-        }
-        template.process(info, new FileWriter(file));
+        template.process(info, new FileWriter(Utils.createFile(targetFile)));
     }
     private static void createEntityFile(String templateFile, String targetFile, String tableName) throws Exception {
+        //获取指定数据库的所有表或者指定表的数据信息
         Map<String, List<TableInformation>> map = JDBCUtils.getTableInformation(tableName);
+        //遍历表信息
         for(String key: map.keySet()){
             String reTargetFile = targetFile;
             EntityClassInfo info = new EntityClassInfo();
+            //根据表名设置对应的类名
             info.setClassName(Utils.upperCase(Utils.tableNameToEntityName(key)));
+            //设置作者
             info.setAuthor("wei.peng");
+            //得到表字段的对应信息
             List<TableInformation> tableInformations = map.get(key);
             for(TableInformation table: tableInformations){
                 TableInformation tableInformation = new TableInformation();
@@ -159,22 +154,13 @@ public class MyGenerator {
                 tableInformation.setColumnType(Utils.toJavaType(table.getColumnType()));
                 info.entityList.add(tableInformation);
             }
+            //模板初始化
             Template template = config.getTemplate(templateFile);
+            //生成的目标文件名
             reTargetFile = MessageFormat.format(reTargetFile,  info.getClassName());
             System.out.println(templateFile);
             System.out.println(reTargetFile);
-            File file = new File(reTargetFile);
-            // 如果文件存在则报错，不会覆盖以前的文件
-            if (file.exists()) {
-                throw new RuntimeException(file.getName() + "已经存在！");
-            }
-            File parentFile = file.getParentFile();
-            // 创建文件目录
-            if (!parentFile.exists()) {
-                parentFile.mkdirs();
-            }
-            template.process(info, new FileWriter(file));
-
+            template.process(info, new FileWriter(Utils.createFile(reTargetFile)));
         }
 
 

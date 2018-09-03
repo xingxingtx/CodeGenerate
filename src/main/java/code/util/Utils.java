@@ -2,6 +2,7 @@ package code.util;
 
 import io.swagger.models.auth.In;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -146,5 +147,19 @@ public class Utils {
             default:
                 return "String";
         }
+    }
+
+    public static  File createFile(String path){
+        File file = new File(path);
+        // 如果文件存在则报错，不会覆盖以前的文件
+        if (file.exists()) {
+            throw new RuntimeException(file.getName() + "已经存在！");
+        }
+        File parentFile = file.getParentFile();
+        // 创建文件目录
+        if (!parentFile.exists()) {
+            parentFile.mkdirs();
+        }
+        return file;
     }
 }
