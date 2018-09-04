@@ -167,8 +167,6 @@ public class MyGenerator {
 
     }
 
-
-
     // Mybatis文件的创建
     private static void createMyBatisXML(ClassInfo info, String templateFile, String targetFile) throws Exception {
 

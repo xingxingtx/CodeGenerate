@@ -36,5 +36,4 @@ this.${smallClassName}Mapper.update(${smallClassName});
 public ${bigClassName} select(${bigClassName} ${smallClassName}) {
 return this.${smallClassName}Mapper.select(${smallClassName});
 }
-
 }

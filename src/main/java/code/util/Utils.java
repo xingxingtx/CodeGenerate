@@ -88,6 +88,10 @@ public class Utils {
                 return entry.getKey() + "_id Long,";
         }
     }
+
+    /*
+  * 将数据库习惯命名转成实体类的驼峰命名：例如：user_name ---> userName
+  */
     public static String tableNameToEntityName(String tableName){
         String reName = null;
         if(tableName.contains("_")){
