@@ -31,12 +31,16 @@ spring:
           pool-prepared-statements: false
           max-pool-prepared-statement-per-connection-size: 20
     thymeleaf:
-            prefix: classpath:/templates/
-            check-template-location: true
-            suffix: .html
-            encoding: UTF-8
-            mode: LEGACYHTML5
-            cache: false
+     #缓冲的配置
+        cache: false
+        check-template: true
+        check-template-location: true
+        #开启MVC thymeleaf 视图解析
+        enabled: true
+        encoding: utf-8
+        mode: LEGACYHTML5
+        prefix: classpath:/templates/
+        suffix: .html
     aop:
       auto: true
       proxy-target-class: true
@@ -44,6 +48,7 @@ spring:
           multipart:
             max-file-size: 10Mb
             max-request-size: 100Mb
+
 #sql打印
 logging:
   level:

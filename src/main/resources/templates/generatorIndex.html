@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>代码生成首页</title>
+    <script src="/js/jquery-2.0.3.min.js" ></script>
+</head>
+<body>
+
+<form action="" method="get" style="">
+    <table >
+        <tr>代码生成</tr>
+        <tr>
+            <td>表</td><td > <select id="choseTable" name="table"><option>请选择</option></select></td>
+        </tr>
+    </table>
+</form>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            type: "get",
+            url: "/api/getTablesInformation",
+            dataType: "json",
+            success: function (res) {
+                console.log(res.data);
+            }
+
+
+        });
+    });
+
+    function  addOption(id){
+        //根据id查找对象，
+        var  obj=document.getElementById(id);
+        //添加一个选项
+        obj.add( new  Option( "文本" , "值" ));
+    }
+</script>
+
+</body>
+</html>
+</html>

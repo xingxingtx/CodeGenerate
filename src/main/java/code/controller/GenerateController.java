@@ -18,6 +18,8 @@ public class GenerateController {
     private MyGenerator myGenerator;
     @Autowired
     private JDBCUtils jdbcUtils;
+
+
     @RequestMapping("/api/getTablesInformation")
     public String getTablesInformation(@RequestParam(value = "tableName",required = false) String tableName){
         return new JsonResponseData(true,"数据表信息",1,"数据表信息",jdbcUtils.getTableInformation(tableName)).toString();
